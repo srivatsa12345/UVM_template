@@ -3,6 +3,8 @@ class in_monitor extends uvm_monitor;
 	virtual my_if.IN_MON vif;	
 	uvm_analysis_port #(my_transaction) ap;
 
+	my_transaction tr;
+	
 	function new(string name,uvm_component parent);
 		super.new(name,parent);
 		ap=new("ap",this);
@@ -15,9 +17,27 @@ class in_monitor extends uvm_monitor;
 	endfunction
 
 	task run_phase(uvm_phase phase);
-		my_transaction tr;
+		@(vif.cb_in_mon);
+		forever
+			collect_input();
 	endtask
 endclass
 
-	
+task collect_input();
+	my_transaction tr;
+	begin
+		tr=my_transaction::type_id::create("tr");
+		@(vif.cb_in_mon);
+		tr.OPA=vif.cb_in_mon.OPA; 
+		tr.OPB=vif.cb_in_mon.OPB; 
+		tr.CE=vif.cb_in_mon.CE; 
+		tr.MODE=vif.cb_in_mon.MODE; 
+		tr.CIN=vif.cb_in_mon.CIN; 
+		tr.CMD=vif.cb_in_mon.CMD; 
+		tr.INP_VALID=vif.cb_in_mon.INP_VALID;
+		`uvm_info("INPUT_MONITOR",$sformatf("Input MONITOR\n%s",tr.sprint()),UVM_NONE)
+		ap_port.write(tr);
+	end
+endtask
+
 

@@ -6,6 +6,8 @@ class my_transaction extends uvm_sequence_item;
 	bit [DW*2-1:0] RES;
 	bit COUT, OFLOW, G, E, L, ERR;
 
+	bit rst;
+
 	function new (string name);
 		super.new(name);
 	endfunction

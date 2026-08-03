@@ -15,9 +15,28 @@ class out_monitor extends uvm_monitor;
 	endfunction
 
 	task run_phase(uvm_phase phase);
-		my_transaction tr;
+		@(vif.cb_out_mon);
+		forever
+			collect_output();
 	endtask
 endclass
 
-	
+task collect_output();
+	my_transaction tr;
+	begin
+		tr=my_transaction::type_id::create("tr");
+		@(vif.cb_out_mon);
+		tr.RES=vif.cb_out_mon.RES; 
+		tr.COUT=vif.cb_out_mon.COUT; 
+		tr.OFLOW=vif.cb_out_mon.OFLOW; 
+		tr.G=vif.cb_out_mon.G; 
+		tr.E=vif.cb_out_mon.E; 
+		tr.L=vif.cb_out_mon.L; 
+		tr.ERR=vif.cb_out_mon.ERR;
+		tr.rst=vif.cb_out_mon.rst;
+		`uvm_info("OUTPUT_MONITOR",$sformatf("Output MONITOR\n%s",tr.sprint()),UVM_NONE)
+		ap_port.write(tr);
+	end
+endtask
+
 
