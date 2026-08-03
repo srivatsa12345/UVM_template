@@ -35,7 +35,7 @@ task collect_output();
 		tr.ERR=vif.cb_out_mon.ERR;
 		tr.rst=vif.cb_out_mon.rst;
 		`uvm_info("OUTPUT_MONITOR",$sformatf("Output MONITOR\n%s",tr.sprint()),UVM_NONE)
-		ap_port.write(tr);
+		ap.write(tr);
 	end
 endtask
 

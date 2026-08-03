@@ -36,7 +36,7 @@ task collect_input();
 		tr.CMD=vif.cb_in_mon.CMD; 
 		tr.INP_VALID=vif.cb_in_mon.INP_VALID;
 		`uvm_info("INPUT_MONITOR",$sformatf("Input MONITOR\n%s",tr.sprint()),UVM_NONE)
-		ap_port.write(tr);
+		ap.write(tr);
 	end
 endtask
 
