@@ -21,16 +21,16 @@ class driver extends uvm_driver#(my_transaction);
 	endtask
 endclass
 
-task drive(my_transaction req);
+task drive(my_transaction tr);
 	begin
-		`uvm_info("DRIVER",$sformatf("DRV:\n%s",req.sprint()),UVM_NONE)
+		`uvm_info("DRIVER",$sformatf("DRV:\n%s",tr.sprint()),UVM_NONE)
 		@(vif.cb_drv);
-		vif.cb_drv.OPA<=req.OPA; 
-		vif.cb_drv.OPB<=req.OPB; 
-		vif.cb_drv.CE<=req.CE; 
-		vif.cb_drv.MODE<=req.MODE; 
-		vif.cb_drv.CIN<=req.CIN; 
-		vif.cb_drv.CMD<=req.CMD; 
-		vif.cb_drv.INP_VALID<=req.INP_VALID;
+		vif.cb_drv.OPA<=tr.OPA; 
+		vif.cb_drv.OPB<=tr.OPB; 
+		vif.cb_drv.CE<=tr.CE; 
+		vif.cb_drv.MODE<=tr.MODE; 
+		vif.cb_drv.CIN<=tr.CIN; 
+		vif.cb_drv.CMD<=tr.CMD; 
+		vif.cb_drv.INP_VALID<=tr.INP_VALID;
 	end
 endtask
