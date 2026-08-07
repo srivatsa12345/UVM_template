@@ -8,7 +8,7 @@ class driver extends uvm_driver#(my_transaction);
 
 	function void build_phase(uvm_phase phase);
 		super.build_phase(phase);
-		if(!uvm_config_db#(virtual my_if.DRV)::get(this,"","vif.drv",vif))
+		if(!uvm_config_db#(virtual my_if)::get(this,"","vif",vif))
 			`uvm_fatal("NOVIF", "vif not found in driver")
 	endfunction
 	
@@ -19,18 +19,18 @@ class driver extends uvm_driver#(my_transaction);
 			seq_item_port.item_done();
 		end
 	endtask
+	task drive(my_transaction tr);
+		begin
+			`uvm_info("DRIVER",$sformatf("DRV:\n%s",tr.sprint()),UVM_NONE)
+			@(vif.cb_drv);
+			vif.cb_drv.OPA<=tr.OPA; 
+			vif.cb_drv.OPB<=tr.OPB; 
+			vif.cb_drv.CE<=tr.CE; 
+			vif.cb_drv.MODE<=tr.MODE; 
+			vif.cb_drv.CIN<=tr.CIN; 
+			vif.cb_drv.CMD<=tr.CMD; 
+			vif.cb_drv.INP_VALID<=tr.INP_VALID;
+		end
+	endtask
 endclass
 
-task drive(my_transaction tr);
-	begin
-		`uvm_info("DRIVER",$sformatf("DRV:\n%s",tr.sprint()),UVM_NONE)
-		@(vif.cb_drv);
-		vif.cb_drv.OPA<=tr.OPA; 
-		vif.cb_drv.OPB<=tr.OPB; 
-		vif.cb_drv.CE<=tr.CE; 
-		vif.cb_drv.MODE<=tr.MODE; 
-		vif.cb_drv.CIN<=tr.CIN; 
-		vif.cb_drv.CMD<=tr.CMD; 
-		vif.cb_drv.INP_VALID<=tr.INP_VALID;
-	end
-endtask

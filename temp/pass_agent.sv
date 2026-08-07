@@ -1,5 +1,5 @@
-class act_agent extends uvm_agent;
-	`uvm_component_utis(act_agent)
+class pass_agent extends uvm_agent;
+	`uvm_component_utis(pass_agent)
 	out_monitor out_mon;
 	function new(string name,uvm_component parent);
 		super.new(name,parent);

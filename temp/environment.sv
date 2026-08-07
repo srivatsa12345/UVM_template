@@ -1,4 +1,4 @@
-class environment extends uvm_environment;
+class environment extends uvm_env;
 	`uvm_component_utils(environment)
 	act_agent a_ag;
 	pass_agent p_ag;

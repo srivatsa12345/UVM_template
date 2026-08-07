@@ -3,8 +3,7 @@ class scoreboard extends uvm_scoreboard;
 	uvm_analysis_imp_fifo #(my_transaction)in_fifo;
 	uvm_analysis_imp_fifo #(my_transaction)out_fifo;
 
-	my_transaction inp_mon;
-	my_transaction out_mon;
+	int TOTAL,MISMATCH,MATCH;
 
 	function new(string name, uvm_component parent);
 		super.new(name,parent);
@@ -24,8 +23,15 @@ class scoreboard extends uvm_scoreboard;
 			validate_outputs(inp_mon_xn,out_mon_xn);
 		end
 	endtask
+
+	task validate_outputs(my_transaction inp, my_transaction out);
+	endtask
+
+	task compare_results();
+		`uvm_info("SCOREBOARD",$sformatf("Total clock Cycles Checked:%0d\n Total cycles matched:%0d\n Total cycles failes:%0d",TOTAL,MATCH,MISMATCH),UVM_NONE);
+	endtask
+
+	task ref_model(my_transaction inp);
+	endtask
+	
 endclass
-task validate_outputs(my_transaction inp, my_transaction out);
-endtask
-task ref_model(my_transaction inp);
-endtask

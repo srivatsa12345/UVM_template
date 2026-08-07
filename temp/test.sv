@@ -1,6 +1,7 @@
 class test extends uvm_test;
 	`uvm_component_utils(test);
 	environment env;
+	sequneces seq;
 
 	function new (string name,uvm_component parent);
 		super.new(name,parent);
@@ -12,7 +13,6 @@ class test extends uvm_test;
 	endfunction
 
 	task run_phase(uvm_phase phase);
-		sequneces seq;
 		phase.raise_objection(this);
 		seq=sequences::type_id::create("seq");
 		seq.start(env.a_ag.sqr);
