@@ -29,12 +29,6 @@ class in_monitor extends uvm_monitor;
 			tr=my_transaction::type_id::create("tr");
 			@(vif.cb_in_mon);
 			tr.OPA=vif.cb_in_mon.OPA; 
-			tr.OPB=vif.cb_in_mon.OPB; 
-			tr.CE=vif.cb_in_mon.CE; 
-			tr.MODE=vif.cb_in_mon.MODE; 
-			tr.CIN=vif.cb_in_mon.CIN; 
-			tr.CMD=vif.cb_in_mon.CMD; 
-			tr.INP_VALID=vif.cb_in_mon.INP_VALID;
 			`uvm_info("INPUT_MONITOR",$sformatf("Input MONITOR\n%s",tr.sprint()),UVM_NONE)
 			ap.write(tr);
 		end

@@ -1,6 +1,7 @@
 package pkg;
 	`include "defines.svh"
 	`include "uvm_macros.svh"
+	`include "defines.svh"
 	import uvm_pkg::*;
 	`include "my_transaction.sv"
 	`include "sequencer.sv"

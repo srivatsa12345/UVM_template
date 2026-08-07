@@ -24,12 +24,6 @@ class driver extends uvm_driver#(my_transaction);
 			`uvm_info("DRIVER",$sformatf("DRV:\n%s",tr.sprint()),UVM_NONE)
 			@(vif.cb_drv);
 			vif.cb_drv.OPA<=tr.OPA; 
-			vif.cb_drv.OPB<=tr.OPB; 
-			vif.cb_drv.CE<=tr.CE; 
-			vif.cb_drv.MODE<=tr.MODE; 
-			vif.cb_drv.CIN<=tr.CIN; 
-			vif.cb_drv.CMD<=tr.CMD; 
-			vif.cb_drv.INP_VALID<=tr.INP_VALID;
 		end
 	endtask
 endclass

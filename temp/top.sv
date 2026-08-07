@@ -1,5 +1,3 @@
-`define DW 8;
-`define CW 4;
 `include "package.sv"
 `include "interface.sv"
 module top;
