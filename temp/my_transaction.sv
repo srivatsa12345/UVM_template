@@ -3,7 +3,7 @@ class my_transaction extends uvm_sequence_item;
 
 	bit rst;
 
-	function new (string name);
+	function new (string name="my_trans");
 		super.new(name);
 	endfunction
 

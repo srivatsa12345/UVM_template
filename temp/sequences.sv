@@ -2,7 +2,7 @@ class sequences extends uvm_sequence #(my_transaction);
 	
 	`uvm_object_utils(sequences)
 
-	function new (string name);
+	function new (string name="seq");
 		super.new(name);
 	endfunction
 
