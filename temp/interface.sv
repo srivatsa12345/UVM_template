@@ -2,7 +2,6 @@ interface my_if(input logic clk, input logic rst);
 
 	clocking cb_drv@(posedge clk);
 		default input #1 output #1;
-		input rst;
 	endclocking
 	clocking cb_in_mon@(posedge clk);
 		default input #1 output #1;
